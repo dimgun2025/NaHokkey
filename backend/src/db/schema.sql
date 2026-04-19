@@ -17,6 +17,9 @@ CREATE TABLE IF NOT EXISTS users (
   positions     TEXT[],                      -- массив амплуа (до 2)
   avatar_url    TEXT,
   role          VARCHAR(20) DEFAULT 'player', -- player | coach | organizer | admin
+  push_token    TEXT,                          -- FCM token для push-уведомлений
+  call_allowed  BOOLEAN DEFAULT TRUE,          -- согласие на звонки
+  sms_allowed   BOOLEAN DEFAULT TRUE,          -- согласие на SMS
   created_at    TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -126,6 +129,35 @@ CREATE TABLE IF NOT EXISTS event_messages (
 
 -- Индекс для быстрого поиска сообщений события
 CREATE INDEX IF NOT EXISTS idx_messages_event ON event_messages(event_id, event_type);
+
+-- ===== OTP КОДЫ (SMS авторизация) =====
+CREATE TABLE IF NOT EXISTS otp_codes (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  phone       VARCHAR(20) NOT NULL,
+  code        VARCHAR(6) NOT NULL,
+  expires_at  TIMESTAMPTZ NOT NULL DEFAULT NOW() + INTERVAL '5 minutes',
+  used        BOOLEAN DEFAULT FALSE,
+  created_at  TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_otp_phone ON otp_codes(phone, expires_at);
+
+-- ===== ПЛАТЕЖИ (ЮКасса) =====
+CREATE TABLE IF NOT EXISTS payments (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id         UUID REFERENCES users(id) ON DELETE CASCADE,
+  event_type      VARCHAR(10) NOT NULL CHECK (event_type IN ('game', 'training')),
+  event_id        UUID NOT NULL,
+  yookassa_id     TEXT UNIQUE,
+  amount          INT NOT NULL,
+  -- pending → waiting_for_capture → succeeded → canceled → refunded
+  status          VARCHAR(30) DEFAULT 'pending',
+  refund_reason   TEXT,
+  created_at      TIMESTAMPTZ DEFAULT NOW(),
+  captured_at     TIMESTAMPTZ,
+  refunded_at     TIMESTAMPTZ
+);
+CREATE INDEX IF NOT EXISTS idx_payments_user ON payments(user_id);
+CREATE INDEX IF NOT EXISTS idx_payments_event ON payments(event_id, event_type, status);
 
 -- ===== ИНДЕКСЫ =====
 CREATE INDEX IF NOT EXISTS idx_games_date ON games(game_date);

@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { BottomTabBar } from './components/layout/BottomTabBar';
 import Home from './pages/Home';
 import FindGame from './pages/FindGame';
@@ -11,13 +11,21 @@ import Profile from './pages/Profile';
 import GameDetails from './pages/GameDetails';
 import TrainingDetails from './pages/TrainingDetails';
 import Payment from './pages/Payment';
+import Login from './pages/Login';
+
+// Маршруты без нижней навигации
+const NO_NAV_ROUTES = ['/login'];
 
 function App() {
+  const location = useLocation();
+  const showNav = !NO_NAV_ROUTES.includes(location.pathname);
+
   return (
     <>
       <div className="page-container">
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/find" element={<FindGame />} />
           <Route path="/trainings" element={<TrainingList />} />
@@ -31,7 +39,7 @@ function App() {
           <Route path="/payment" element={<Payment />} />
         </Routes>
       </div>
-      <BottomTabBar />
+      {showNav && <BottomTabBar />}
     </>
   );
 }
