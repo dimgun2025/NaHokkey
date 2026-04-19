@@ -41,7 +41,17 @@ export default function ArenasCatalog() {
                 {arena.id === 'iceberg' ? 'Подходит под взрослые любительские команды и групповые занятия.' : null}
               </div>
               
-              <Button variant="outline" onClick={() => navigate('/home')}>{arena.cta}</Button>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                {arena.tags.includes('Игра') && (
+                  <Button style={{ flex: 1 }} onClick={() => navigate('/find')}>Найти игру</Button>
+                )}
+                {(arena.tags.includes('Тренировка') || arena.tags.includes('Под тренера') || arena.tags.includes('Подкатки')) && (
+                  <Button variant="outline" style={{ flex: 1 }} onClick={() => navigate('/trainings')}>Найти подкатку</Button>
+                )}
+                {!arena.tags.includes('Игра') && !arena.tags.includes('Тренировка') && !arena.tags.includes('Под тренера') && (
+                  <Button variant="outline" onClick={() => navigate('/find')}>{arena.cta}</Button>
+                )}
+              </div>
             </CardContent>
           </Card>
         ))}

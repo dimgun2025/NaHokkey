@@ -9,7 +9,7 @@ interface ScreenProps {
 
 export function Screen({ title, subtitle, children, actions }: ScreenProps) {
   return (
-    <div style={{ backgroundColor: 'var(--bg-app)', minHeight: '100dvh', padding: '16px', paddingBottom: '120px' }}>
+    <div style={{ backgroundColor: 'var(--bg-app)', minHeight: '100dvh', padding: '16px', paddingBottom: '140px' }}>
       <div style={{ maxWidth: '896px', margin: '0 auto' }}>
         <div style={{ 
           marginBottom: '24px', 
