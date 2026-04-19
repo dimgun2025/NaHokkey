@@ -8,6 +8,8 @@ import trainingsRouter from './routes/trainings';
 import arenasRouter from './routes/arenas';
 import profileRouter from './routes/profile';
 import chatRouter from './routes/chat';
+import paymentsRouter from './routes/payments';
+import { startCaptureCron } from './jobs/capture';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,7 +23,7 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: '2mb' }));
+app.use(express.json({ limit: '15mb' })); // 15MB для загрузки фото в чате
 
 // --- Health check ---
 app.get('/api/health', (_req, res) => {
@@ -35,6 +37,7 @@ app.use('/api/trainings', trainingsRouter);
 app.use('/api/arenas', arenasRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/chat', chatRouter);
+app.use('/api/payments', paymentsRouter);
 
 // --- 404 fallback ---
 app.use('/api', (_req, res) => {
@@ -44,6 +47,7 @@ app.use('/api', (_req, res) => {
 // --- Start ---
 app.listen(PORT, () => {
   console.log(`НаХоккей API запущен на порту ${PORT} [${process.env.NODE_ENV}]`);
+  startCaptureCron(); // Запуск задачи автосписания и уведомлений
 });
 
 export default app;
