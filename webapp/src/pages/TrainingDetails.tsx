@@ -5,6 +5,7 @@ import { trainings, coachProfiles } from '../data/mockData';
 import { formatSlotMeta } from '../lib/utils';
 import { GraduationCap, Clock3, Users, Wallet } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { EventChat } from '../components/ui/EventChat';
 
 export default function TrainingDetails() {
   const navigate = useNavigate();
@@ -70,12 +71,10 @@ export default function TrainingDetails() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Что получит пользователь</CardTitle>
+              <CardTitle>Чат события</CardTitle>
             </CardHeader>
-            <CardContent style={{ display: 'grid', gap: '8px', fontSize: '0.875rem', color: '#475569' }}>
-              <div style={{ borderRadius: '1rem', backgroundColor: '#f8fafc', padding: '12px' }}>Понятную цель занятия</div>
-              <div style={{ borderRadius: '1rem', backgroundColor: '#f8fafc', padding: '12px' }}>Группу нужного уровня</div>
-              <div style={{ borderRadius: '1rem', backgroundColor: '#f8fafc', padding: '12px' }}>Прозрачную оплату без чатов</div>
+            <CardContent>
+              <EventChat eventType="training" eventId={training.id} />
             </CardContent>
           </Card>
         </div>

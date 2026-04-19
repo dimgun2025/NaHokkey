@@ -7,6 +7,7 @@ import gamesRouter from './routes/games';
 import trainingsRouter from './routes/trainings';
 import arenasRouter from './routes/arenas';
 import profileRouter from './routes/profile';
+import chatRouter from './routes/chat';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +34,7 @@ app.use('/api/games', gamesRouter);
 app.use('/api/trainings', trainingsRouter);
 app.use('/api/arenas', arenasRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/chat', chatRouter);
 
 // --- 404 fallback ---
 app.use('/api', (_req, res) => {

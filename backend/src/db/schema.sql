@@ -113,6 +113,20 @@ CREATE TABLE IF NOT EXISTS training_participants (
   UNIQUE(training_id, user_id)
 );
 
+-- ===== СООБЩЕНИЯ ЧАТА =====
+CREATE TABLE IF NOT EXISTS event_messages (
+  id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  event_type   VARCHAR(10) NOT NULL CHECK (event_type IN ('game', 'training')),
+  event_id     UUID NOT NULL,
+  user_id      UUID REFERENCES users(id) ON DELETE CASCADE,
+  content      VARCHAR(50),
+  image_url    TEXT, -- Ссылка на фото или base64
+  created_at   TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Индекс для быстрого поиска сообщений события
+CREATE INDEX IF NOT EXISTS idx_messages_event ON event_messages(event_id, event_type);
+
 -- ===== ИНДЕКСЫ =====
 CREATE INDEX IF NOT EXISTS idx_games_date ON games(game_date);
 CREATE INDEX IF NOT EXISTS idx_games_arena ON games(arena_id);

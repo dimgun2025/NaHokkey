@@ -9,6 +9,7 @@ import { StackedRosterBar } from '../components/ui/StackedRosterBar';
 import { Badge } from '../components/ui/Badge';
 import { games } from '../data/mockData';
 import { formatDayLabel, getAgeToneClass } from '../lib/utils';
+import { EventChat } from '../components/ui/EventChat';
 
 export default function GameDetails() {
   const navigate = useNavigate();
@@ -112,10 +113,8 @@ export default function GameDetails() {
             <CardHeader>
               <CardTitle>Чат события</CardTitle>
             </CardHeader>
-            <CardContent style={{ display: 'grid', gap: '8px', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-              <div style={{ borderRadius: '1rem', backgroundColor: 'var(--bg-app)', padding: '12px' }}>Организатор: сбор в 21:45, вход через центральный холл.</div>
-              <div style={{ borderRadius: '1rem', backgroundColor: 'var(--bg-app)', padding: '12px' }}>Игрок: могу взять 20 шайб и насос.</div>
-              <div style={{ borderRadius: '1rem', backgroundColor: 'var(--bg-app)', padding: '12px' }}>Система: освободилось 1 место в составе.</div>
+            <CardContent>
+              <EventChat eventType="game" eventId={game.id} />
             </CardContent>
           </Card>
         </div>
