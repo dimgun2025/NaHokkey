@@ -1,0 +1,122 @@
+.slot-card {
+  background: var(--bg-surface);
+  border-radius: var(--border-radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle accent for game vs training */
+.slot-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.slot-card-game::before {
+  background: var(--game-color);
+}
+
+.slot-card-training::before {
+  background: var(--training-color);
+}
+
+.slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slot-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slot-title {
+  margin: 0;
+  color: var(--text-main);
+}
+
+.slot-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.slot-training-goal {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  background: rgba(15, 76, 129, 0.05);
+  padding: 4px 8px;
+  border-radius: var(--border-radius-sm);
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.icon-sub {
+  opacity: 0.7;
+}
+
+.slot-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-color);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.detail-item svg {
+  color: var(--text-main);
+  opacity: 0.6;
+}
+
+.detail-goalie {
+  grid-column: span 2;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.goalie-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-color);
+}
+
+.slot-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+
+.slot-price {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+}

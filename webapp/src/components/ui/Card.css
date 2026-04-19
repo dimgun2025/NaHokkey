@@ -1,0 +1,38 @@
+.card-component {
+  background-color: var(--bg-surface);
+  border-radius: 1.5rem; /* rounded-3xl approx */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05); /* shadow-sm / shadow-md */
+  border: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.15rem; /* text-xl */
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-description {
+  margin: 0;
+  font-size: 0.875rem; /* text-sm */
+  color: var(--text-secondary);
+}
+
+.card-content {
+  padding: 1.5rem;
+  padding-top: 0;
+  display: grid;
+  gap: 1rem;
+}

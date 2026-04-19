@@ -1,0 +1,23 @@
+.pill-component {
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem; /* text-xs */
+  color: var(--text-secondary);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.tone-pill-component {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+  white-space: nowrap;
+}

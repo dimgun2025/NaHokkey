@@ -1,0 +1,33 @@
+.stacked-roster-container {
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  background-color: #f1f5f9; /* slate-100 */
+}
+
+.stacked-roster-bar {
+  display: flex;
+  height: 28px; /* h-7 */
+  width: 100%;
+}
+
+.stacked-roster-segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.stacked-roster-label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.stacked-roster-remaining {
+  background-color: #e2e8f0; /* slate-200 */
+}

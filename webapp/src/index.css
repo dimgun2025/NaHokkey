@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand Colors - Premium Dark/Ice aesthetic */
+  --primary-color: #0f4c81; /* Classic Blue */
+  --primary-light: #2c72b5;
+  --primary-dark: #082947;
+  --accent-color: #f72585; /* Energetic pink/red for actions */
+  
+  /* Game / Training specific */
+  --game-color: #4361ee;
+  --training-color: #4cc9f0;
+  
+  /* Status Colors */
+  --status-confirmed: #2ecc71;
+  --status-risk: #f39c12;
+  --status-canceled: #e74c3c;
+  --status-urgent: #e74c3c; /* e.g., goalie needed */
+
+  /* Surface & Background (Light mode but premium) */
+  --bg-app: #f8f9fa;
+  --bg-surface: #ffffff;
+  --text-main: #1d2125;
+  --text-secondary: #5e6c84;
+  --text-inverse: #ffffff;
+  
+  /* Borders & Shadows */
+  --border-color: #ebecf0;
+  --shadow-sm: 0 2px 8px rgba(9, 30, 66, 0.04);
+  --shadow-md: 0 4px 16px rgba(9, 30, 66, 0.08);
+  --shadow-lg: 0 8px 32px rgba(9, 30, 66, 0.12);
+  
+  /* Layout */
+  --bottom-bar-height: 64px;
+  --header-height: 56px;
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-pill: 999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+}
+
+/* Reset & Basics */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  /* Prevent pull to refresh on mobile */
+  overscroll-behavior-y: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  /* Mobile mock container */
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: var(--bg-app);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-light);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Layout Utilities */
+.page-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: calc(var(--bottom-bar-height) + 24px); /* Space for bottom bar */
+}
+
+/* Hide scrollbar for clean premium look */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Common UI Patterns */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Card hover animation */
+.hover-lift {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+.hover-lift:active {
+  transform: scale(0.98);
+}
+
+/* Text truncations */
+.truncate-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Tone Colors for Badges and Bars (from new Clickable Structure) --- */
+
+/* Age Tones */
+.tone-age-40 { border: 1px solid #fde68a; background-color: #fffbeb; color: #b45309; }
+.tone-age-18 { border: 1px solid #a7f3d0; background-color: #ecfdf5; color: #047857; }
+
+/* Skill Tones */
+.tone-skill-c0 { border: 1px solid #047857; background-color: #047857; color: #ffffff; }
+.tone-skill-c1 { border: 1px solid #34d399; background-color: #d1fae5; color: #064e3b; }
+.tone-skill-c2 { border: 1px solid #bef264; background-color: #ecfccb; color: #365314; }
+.tone-skill-c3 { border: 1px solid #fcd34d; background-color: #fef3c7; color: #78350f; }
+.tone-skill-c4 { border: 1px solid #fca5a5; background-color: #fee2e2; color: #7f1d1d; }
+
+/* Combined Bar Tones */
+.tone-combined-18-c0 { background-color: #047857; color: #ffffff; }
+.tone-combined-18-c1 { background-color: #10b981; color: #ffffff; }
+.tone-combined-18-c2 { background-color: #84cc16; color: #020617; }
+.tone-combined-18-c3 { background-color: #fb923c; color: #020617; }
+.tone-combined-18-c4 { background-color: #ef4444; color: #ffffff; }
+
+.tone-combined-40-c0 { background-color: #115e59; color: #ffffff; }
+.tone-combined-40-c1 { background-color: #0d9488; color: #ffffff; }
+.tone-combined-40-c2 { background-color: #fbbf24; color: #020617; }
+.tone-combined-40-c3 { background-color: #f59e0b; color: #020617; }
+.tone-combined-40-c4 { background-color: #f43f5e; color: #ffffff; }
+
+/* Age Tones 50+ */
+.tone-age-50 { border: 1px solid #c084fc; background-color: #f3e8ff; color: #7e22ce; }
+
+/* Combined Bar Tones 50+ */
+.tone-combined-50-c0 { background-color: #581c87; color: #ffffff; }
+.tone-combined-50-c1 { background-color: #7e22ce; color: #ffffff; }
+.tone-combined-50-c2 { background-color: #a855f7; color: #ffffff; }
+.tone-combined-50-c3 { background-color: #c084fc; color: #ffffff; }
+.tone-combined-50-c4 { background-color: #d8b4fe; color: #4a044e; }
+
+/* Interactive Hockey Rink styles */
+.hockey-rink-container {
+  width: 100%;
+  aspect-ratio: 1/1.2;
+  background-color: #ffffff;
+  border: 6px solid #94a3b8; /* Bolder board */
+  border-radius: 4.5rem 4.5rem 0 0;
+  position: relative;
+  overflow: hidden;
+  margin: 16px 0;
+  background-image: 
+    linear-gradient(to top, #2563eb 4px, transparent 4px), /* Bolder Blue line */
+    radial-gradient(circle at 50% 100%, #eff6ff 0%, #ffffff 100%); /* Subtle floor gradient */
+  background-position: top, center;
+  background-size: 100% 4px, 100% 100%;
+  background-repeat: no-repeat;
+  box-shadow: inset 0 0 20px rgba(148, 163, 184, 0.1);
+}
+
+/* Red lines and face-off circles */
+.rink-markings {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+.goal-line {
+  position: absolute;
+  bottom: 8%;
+  left: 0; right: 0;
+  height: 3px; /* Bolder */
+  background-color: #ef4444;
+  opacity: 0.7;
+}
+
+.hockey-rink-crease {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 32px;
+  border: 4px solid #ef4444; /* Bolder crease */
+  border-bottom: none;
+  border-radius: 32px 32px 0 0;
+  background-color: rgba(186, 230, 253, 0.4);
+}
+
+.face-off-circle {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border: 3px solid #ef4444; /* Bolder circles */
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.circle-ld { bottom: 20%; left: -10%; }
+.circle-rd { bottom: 20%; right: -10%; }
+
+.face-off-dot {
+  position: absolute;
+  width: 10px; /* Bolder dot */
+  height: 10px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.player-spot {
+  position: absolute;
+  width: 50px; /* Slightly larger */
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid var(--border-color); /* Bolder player spot */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.player-spot:hover {
+  transform: scale(1.1);
+  border-color: var(--primary-color);
+}
+
+.player-spot.selected {
+  background-color: var(--primary-color);
+  border-color: #1e40af; /* Darker blue border for contrast */
+  color: white;
+  box-shadow: 0 0 15px rgba(15, 76, 129, 0.5), 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+.player-spot-label {
+  font-size: 10px;
+  font-weight: 800;
+  margin-top: 1px;
+}
+
+/* Positions coordinates refined for absolute symmetry */
+.pos-g  { bottom: 6%; left: calc(50% - 25px); } /* 50px width / 2 */
+.pos-ld { bottom: 35%; left: 16%; }
+.pos-rd { bottom: 35%; right: 16%; }
+.pos-lw { top: 18%; left: 12%; }
+.pos-c  { top: 12%; left: calc(50% - 25px); }
+.pos-rw { top: 18%; right: 12%; }
+
+@keyframes playerShake {
+  0% { transform: scale(1) translateX(0); }
+  25% { transform: scale(1.05) translateX(-2px); }
+  75% { transform: scale(1.05) translateX(2px); }
+  100% { transform: scale(1) translateX(0); }
+}
+
+.player-spot:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 20px rgba(15, 76, 129, 0.3);
+  animation: playerShake 0.15s infinite;
+  z-index: 20;
+}
+
+.player-spot.selected {
+  background-color: var(--primary-color);
+  border-color: #1e40af;
+  color: white;
+  box-shadow: 0 0 15px rgba(15, 76, 129, 0.5), 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+.player-spot.selected:hover {
+  animation: playerShake 0.1s infinite;
+}
+
+/* Compact Grip buttons */
+.grip-btn-small {
+  padding: 6px 12px !important;
+  font-size: 0.875rem !important;
+  border-radius: 0.5rem !important;
+}
